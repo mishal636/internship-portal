@@ -55,3 +55,19 @@ Expolink is a web-based Internship Management System designed to connect compani
 
 6.	Open your browser and visit:
 	```http://localhost:3000/login.html```
+
+## Future Improvements
+
+### Employer Side
+- **Edit Internships:** Enable editing of internship details (title, description, location, duration, stipend, deadline) directly from the Manage Internships page.
+- **Company Profile Management:** Allow employers to update their company name, password, and description securely.
+- **Application Status Management:** Provide functionality for employers to update the status of candidate applications (e.g., pending, shortlisted, rejected, accepted).
+
+### Student Side
+- **Enhanced Internship Applications:** Allow students to upload resumes and add personalized descriptions when applying for internships.
+- **Application Status Tracking:** Enable students to view the status of their internship applications in real-time.
+
+⸻
+
+Author: Mishal Mohammed
+Date: 24-06-2025
