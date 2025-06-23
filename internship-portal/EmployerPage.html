@@ -1,0 +1,220 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Internships & Fresh Graduates</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #333;
+  line-height: 1.5;
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Group logo and nav links on left side */
+.left-header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0047cc;
+  white-space: nowrap;
+}
+
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+
+nav a {
+  text-decoration: none;
+  color: #0047cc;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+nav a:hover {
+  background-color: #e6efff;
+  color: #003099;
+}
+
+
+nav a.active {
+  background-color: #597ec2;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+
+.get-started {
+  background-color: #0047cc;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  border: none;
+  transition: background-color 0.3s, transform 0.2s;
+  white-space: nowrap;
+}
+
+
+.get-started:hover {
+  background-color: #003399;
+  transform: scale(1.03);
+  cursor: pointer;
+}
+
+
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f5f8ff;
+}
+
+
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+
+.hero .btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 28px;
+  background-color: #0047cc;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+
+.hero .btn:hover {
+  background-color: #003399;
+  transform: scale(1.05);
+}
+
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+
+.features > div {
+  background-color: #f9faff;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0, 71, 204, 0.1);
+  flex: 1 1 280px;
+  text-align: center;
+  transition: box-shadow 0.3s;
+}
+
+
+
+
+.features h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: #0047cc;
+}
+
+
+.features p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.4;
+}
+
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #f1f1f1;
+  color: #777;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="left-header">
+      <div class="logo">Expolink</div>
+      <nav>
+        <a href="candidate.html" >Candidate</a>
+        <a href="Employerpage.html"class="active">Employer</a>
+      </nav>
+    </div>
+    <a href="login.html" class="get-started">Login</a>
+  </header>
+
+
+  <main>
+     <section class="hero">
+      <h1>Connect with Top Interns & Companies</h1>
+      <a class="btn" href="signup.html">Get Started</a>
+    </section>
+
+
+    <section class="features">
+      <div>
+        <h3>Company Dashboard</h3>
+        <p>Personalized dashboard to navigate internship creation, application management, and account settings.</p>
+      </div>
+      <div>
+        <h3>Internship Management</h3>
+        <p>Create, edit, view, and delete internship listings with details like title, location, skills, salary, duration, and deadlines.</p>
+      </div>
+      <div>
+        <h3>Application Management</h3>
+        <p>View and manage applications by marking them as rejected, shortlisted, or accepted, with search options for easy filtering.</p>
+      </div>
+    </section>
+  </main>
+
+
+  <footer>
+    <p>© 2025 Expolink. Designed for Students and Employers.</p>
+  </footer>
+</body>
+</html>

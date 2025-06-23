@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Profile – Expolink</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f8ff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .left-header {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0047cc;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0047cc;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    nav a:hover {
+      background-color: #e6efff;
+      color: #003099;
+    }
+
+    nav a.active {
+      background-color: #597ec2;
+      color: white;
+    }
+
+    .logout-btn {
+      background-color: #0047cc;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      border: none;
+      transition: background-color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background-color: #003399;
+      transform: scale(1.03);
+    }
+
+    main {
+      flex: 1;
+      max-width: 600px;
+      margin: 50px auto 80px;
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: #0047cc;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      padding: 14px 16px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    button[type="submit"] {
+      background-color: #0047cc;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #003399;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="left-header">
+        <div class="logo">Expolink <span style="font-size: 14px; color: #888;">CANDIDATE</span></div>
+      <nav>
+        <a href="candidate-dashboard.html">Dashboard</a>
+        <a href="student-browse-internship.html">Browse Internships</a>
+        <a href="candidate-account.html" class="active">My Profile</a>
+      </nav>
+    </div>
+    <form onsubmit="handleLogout(event)" style="margin: 0;">
+      <button class="logout-btn" type="submit">Logout</button>
+    </form>
+  </header>
+
+  <main>
+    <h2>Edit Your Profile</h2>
+    <form id="editProfileForm">
+      <input type="text" name="name" placeholder="Your Full Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="bio" placeholder="Write something about yourself..."></textarea>
+      <button type="submit">Save Changes</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 Expolink. Designed for Students and Employers.</p>
+  </footer>
+
+  <script>
+    document.getElementById("editProfileForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = new URLSearchParams(new FormData(form));
+
+      try {
+        const res = await fetch("/api/candidate/profile", {
+          method: "POST",
+          body: data
+        });
+
+        const msg = await res.text();
+        alert(msg);
+      } catch {
+        alert("Failed to save changes. Please try again.");
+      }
+    });
+
+    function handleLogout(event) {
+      event.preventDefault();
+      window.location.href = "/login.html";
+    }
+  </script>
+</body>
+</html>

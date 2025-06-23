@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Applicants – Expolink</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f8ff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .left-header {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0047cc;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0047cc;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    nav a:hover {
+      background-color: #e6efff;
+      color: #003099;
+    }
+
+    nav a.active {
+      background-color: #597ec2;
+      color: white;
+    }
+
+    .logout-btn {
+      background-color: #0047cc;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      border: none;
+      transition: background-color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background-color: #003399;
+      transform: scale(1.03);
+    }
+
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0047cc;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #0047cc;
+      color: #fff;
+    }
+
+    tr:hover {
+      background-color: #f0f6ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+      color: #777;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="left-header">
+    <div class="logo">Expolink <span style="font-size: 14px; color: #888;">EMPLOYER</span></div>
+    <nav>
+      <a href="employer-dashboard.html">Dashboard</a>
+      <a href="employer-create-internship.html">Create Internship</a>
+      <a href="employer-manage-internship.html">Manage Internships</a>
+      <a href="employer-view-applicants.html" class="active">View Applications</a>
+      <a href="employer-company-account.html">Company Account</a>
+    </nav>
+  </div>
+  <form onsubmit="handleLogout(event)" style="margin: 0;">
+    <button class="logout-btn" type="submit">Logout</button>
+  </form>
+</header>
+
+<main>
+  <h2>Applicants for Internships</h2>
+  <table id="applicantsTable">
+    <thead>
+      <tr>
+        <th>Candidate Name</th>
+        <th>Internship Title</th>
+        <th>Internship ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data inserted here by JavaScript -->
+    </tbody>
+  </table>
+</main>
+
+<footer>
+  <p>© 2025 Expolink. Designed for Students and Employers.</p>
+</footer>
+
+<script>
+  fetch('/api/applicants')
+    .then(res => res.json())
+    .then(data => {
+      const table = document.querySelector('#applicantsTable tbody');
+      data.forEach(app => {
+        const row = `
+          <tr>
+            <td>${app.candidate_name}</td>
+            <td>${app.title}</td>
+            <td>${app.internship_id}</td>
+          </tr>
+        `;
+        table.innerHTML += row;
+      });
+    })
+    .catch(err => {
+      document.querySelector('#applicantsTable tbody').innerHTML = `
+        <tr><td colspan="3" style="text-align:center; color:#900;">Error loading applicants.</td></tr>
+      `;
+      console.error(err);
+    });
+
+  function handleLogout(event) {
+    event.preventDefault();
+    window.location.href = "/login.html";
+  }
+</script>
+
+</body>
+</html>

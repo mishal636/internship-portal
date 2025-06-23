@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Internships – Expolink</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f8ff;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .left-header {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0047cc;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0047cc;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    nav a:hover {
+      background-color: #e6efff;
+      color: #003099;
+    }
+
+    nav a.active {
+      background-color: #597ec2;
+      color: white;
+    }
+
+    .logout-btn {
+      background-color: #0047cc;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      border: none;
+      transition: background-color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background-color: #003399;
+      transform: scale(1.03);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      color: #0047cc;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #0047cc;
+      color: white;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      vertical-align: middle;
+    }
+
+    tbody tr:hover {
+      background-color: #e6efff;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 40px;
+      color: #777;
+      font-style: italic;
+    }
+
+    button.delete-btn {
+      background-color: #cc4444;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    button.delete-btn:hover {
+      background-color: #a33131;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="left-header">
+    <div class="logo">Expolink <span style="font-size: 14px; color: #888;">EMPLOYER</span></div>
+    <nav>
+      <a href="employer-dashboard.html">Dashboard</a>
+      <a href="employer-create-internship.html">Create Internship</a>
+      <a href="employer-manage-internship.html" class="active">Manage Internships</a>
+      <a href="employer-view-applicants.html">View Applications</a>
+      <a href="employer-company-account.html">Company Account</a>
+    </nav>
+  </div>
+  <form onsubmit="handleLogout(event)" style="margin: 0;">
+    <button class="logout-btn" type="submit">Logout</button>
+  </form>
+</header>
+
+<main>
+  <h1>Manage Internships</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Duration</th>
+        <th>Stipend</th>
+        <th>Deadline</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="internship-table-body">
+      <tr><td class="no-data" colspan="7">Loading internships...</td></tr>
+    </tbody>
+  </table>
+</main>
+
+<script>
+  // Escape HTML to avoid XSS
+  function escapeHtml(text) {
+    if (!text) return '';
+    return text.replace(/&/g, "&amp;")
+               .replace(/</g, "&lt;")
+               .replace(/>/g, "&gt;")
+               .replace(/"/g, "&quot;")
+               .replace(/'/g, "&#039;");
+  }
+
+  async function loadInternships() {
+    try {
+      const response = await fetch('/api/internships');
+      if (!response.ok) throw new Error('Failed to fetch internships');
+
+      const internships = await response.json();
+      const tbody = document.getElementById('internship-table-body');
+      tbody.innerHTML = '';
+
+      if (internships.length === 0) {
+        tbody.innerHTML = '<tr><td class="no-data" colspan="7">No internships found.</td></tr>';
+        return;
+      }
+
+      internships.forEach(internship => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escapeHtml(internship.title)}</td>
+          <td>${escapeHtml(internship.description)}</td>
+          <td>${escapeHtml(internship.location)}</td>
+          <td>${escapeHtml(internship.duration)}</td>
+          <td>${escapeHtml(internship.stipend)}</td>
+          <td>${internship.deadline ? new Date(internship.deadline).toLocaleDateString() : ''}</td>
+          <td><button class="delete-btn" onclick="deleteInternship(${internship.id})">Delete</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    } catch (error) {
+      const tbody = document.getElementById('internship-table-body');
+      tbody.innerHTML = '<tr><td class="no-data" colspan="7">Error loading internships.</td></tr>';
+      console.error(error);
+    }
+  }
+
+  async function deleteInternship(id) {
+    if (!confirm('Are you sure you want to delete this internship?')) return;
+
+    try {
+      const response = await fetch('/delete-internship', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `id=${encodeURIComponent(id)}`
+      });
+      if (!response.ok) throw new Error('Delete failed');
+      alert('Internship deleted successfully.');
+      loadInternships();
+    } catch (error) {
+      alert('Failed to delete internship.');
+      console.error(error);
+    }
+  }
+
+  function handleLogout(event) {
+    event.preventDefault();
+    window.location.href = "/login.html";
+  }
+
+  window.onload = loadInternships;
+</script>
+
+<footer style="text-align:center; padding:20px; background:#fff; box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05); color:#777; margin-top:60px;">
+  <p>© 2025 Expolink. Designed for Students and Employers.</p>
+</footer>
+
+</body>
+</html>

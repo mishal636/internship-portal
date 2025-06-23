@@ -1,0 +1,241 @@
+<!-- student-browse-internship.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Browse Internships – Expolink</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f8ff;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .left-header {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0047cc;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0047cc;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+
+    nav a:hover {
+      background-color: #e6efff;
+      color: #003099;
+    }
+
+    nav a.active {
+      background-color: #597ec2;
+      color: white;
+    }
+
+    .logout-btn {
+      background-color: #0047cc;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      border: none;
+      transition: background-color 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background-color: #003399;
+      transform: scale(1.03);
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0047cc;
+      margin-bottom: 40px;
+      font-weight: 700;
+      font-size: 2.2rem;
+    }
+
+    #internships {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .internship-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      padding: 30px 30px 25px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .internship-card:hover {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .internship-card h2 {
+      color: #0047cc;
+      margin-bottom: 12px;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    .internship-card p {
+      margin: 8px 0;
+      line-height: 1.4;
+      font-size: 1rem;
+    }
+
+    .internship-card p strong {
+      color: #222;
+      font-weight: 600;
+    }
+
+    .apply-btn {
+      margin-top: 20px;
+      padding: 12px 28px;
+      background-color: #0047cc;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+
+    .apply-btn:hover {
+      background-color: #003399;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+      color: #777;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="left-header">
+      <div class="logo">Expolink <span style="font-size: 14px; color: #888;">CANDIDATE</span></div>
+      <nav>
+        <a href="candidate-dashboard.html">Dashboard</a>
+        <a href="student-browse-internship.html" class="active">Browse Internships</a>
+        <a href="candidate-account.html">My Profile</a>
+      </nav>
+    </div>
+    <form onsubmit="handleLogout(event)" style="margin: 0;">
+      <button class="logout-btn" type="submit">Logout</button>
+    </form>
+  </header>
+
+  <main>
+    <h1>Available Internships</h1>
+    <div id="internships"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 Expolink. Designed for Students and Employers.</p>
+  </footer>
+
+  <script>
+    fetch('/api/internships')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('internships');
+        data.forEach(internship => {
+          const div = document.createElement('div');
+          div.className = 'internship-card';
+          div.innerHTML = `
+            <h2>${internship.title}</h2>
+            <p><strong>Description:</strong> ${internship.description}</p>
+            <p><strong>Location:</strong> ${internship.location}</p>
+            <p><strong>Duration:</strong> ${internship.duration}</p>
+            <p><strong>Stipend:</strong> ${internship.stipend || 'Not specified'}</p>
+            <p><strong>Deadline:</strong> ${internship.deadline}</p>
+            <p><strong>Company Name:</strong> ${internship.created_by || 'Unknown'}</p>
+            <button class="apply-btn" onclick="apply(${internship.id})">Apply</button>
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(err => {
+        const container = document.getElementById('internships');
+        container.innerHTML = `<p style="text-align:center; color:#900;">Failed to load internships. Please try again later.</p>`;
+        console.error(err);
+      });
+
+    function apply(internshipId) {
+      const candidateName = prompt("Enter your full name:");
+      if (!candidateName) return;
+      fetch('/apply-internship', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `internshipId=${internshipId}&candidateName=${encodeURIComponent(candidateName)}`
+      })
+      .then(res => res.text())
+      .then(alert)
+      .catch(() => alert('Failed to apply. Please try again later.'));
+    }
+
+    function handleLogout(event) {
+      event.preventDefault();
+      window.location.href = "/login.html";
+    }
+  </script>
+</body>
+</html>

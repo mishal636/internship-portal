@@ -1,0 +1,176 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f8ff;
+    color: #333;
+    line-height: 1.6;
+    padding-bottom: 60px;
+  }
+  
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .left-header {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0047cc;
+    text-decoration: none;
+  }
+  
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #0047cc;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+  }
+  
+  nav a:hover {
+    background-color: #e6efff;
+    color: #003099;
+  }
+  
+  nav a.active {
+    background-color: #597ec2;
+    color: white;
+  }
+  
+  .logout-btn {
+    background-color: #0047cc;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #003399;
+    transform: scale(1.03);
+    cursor: pointer;
+  }
+  
+  /* Form Container */
+  .form-container {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #0047cc;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+  }
+  
+  input, textarea, select {
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+  }
+  
+  button {
+    background-color: #0047cc;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #003399;
+  }
+  
+  /* Table Styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  th {
+    background: #0047cc;
+    color: white;
+  }
+  
+  /* Profile Picture */
+  .profile-pic {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+    color: #777;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
