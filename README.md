@@ -39,14 +39,14 @@ Expolink is a web-based Internship Management System designed to connect compani
    cd expolink
    
 2.	Install dependencies:
-   npm install mysql2 formidable
+   'npm install mysql2 formidable'
 
 3.	Setup MySQL:
 	•	Make sure MySQL server is running.
 	•	The database and tables will be created automatically when you start the server.
 
 4.	Run the server:
-  node server.js
+  	'node server.js'
 
 5.	Open your browser and visit:
-http://localhost:3000/login.html
+	'http://localhost:3000/login.html'
