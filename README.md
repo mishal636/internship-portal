@@ -1,71 +1,67 @@
-# Expolink - Internship Management System
+<div align="center">
 
-## Overview
-Expolink is a web-based Internship Management System designed to connect companies and students. This repository contains both the **Employer Section** and the **Student Section** for seamless internship management and application.
+<img src="banner.svg" alt="Expolink Banner" width="100%">
 
----
+<br>
 
-## Features
+**Enterprise-Grade Internship Management System**
 
-### Employer Side
-- **Dashboard:** Overview of active internships and applications.
-- **Create Internship:** Add new internship listings with details like title, description, location, duration, stipend, and deadline.
-- **Manage Internships:** View, edit, and delete existing internship postings.
-- **View Applications:** See candidate applications for posted internships.
-- **Company Account:** Update company profile including name, email, description, and company image.
-- **Logout:** Securely log out from the employer dashboard.
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](#)
+[![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)](#)
+[![JavaScript](https://img.shields.io/badge/Vanilla_JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
 
-### Student Side
-- **Browse Internships:** View all available internships with detailed information.
-- **Apply for Internships:** Submit applications for desired internships.
-- **My Profile:** Manage personal profile information including name, email, and bio.
-- **View My Applications:** Track the status of submitted internship applications.
-- **Logout:** Securely log out from the student dashboard.
+*A full-stack, lightweight web platform engineered to seamlessly bridge the gap between corporate talent acquisition and student opportunity.*
+
+</div>
+
+<br>
+
+## 📋 Architectural Overview
+Expolink is a dual-portal Internship Management System built from the ground up without heavy frontend frameworks. By utilizing a pure Node.js runtime environment, native HTTP servers, and Vanilla JavaScript, the architecture prioritizes performance, zero-dependency client-side execution, and clean, relational data management via MySQL.
 
 ---
 
-## Technologies Used
-- **Backend:** Node.js, HTTP server, MySQL (using `mysql2` package)
-- **Frontend:** HTML, CSS, JavaScript (Vanilla JS)
-- **Database:** MySQL for user, internship, application, and company data
-- **Form Handling:** `formidable` package for file uploads
+## ⚙️ Core Modules & Features
+
+### 🏢 Employer Portal (Corporate Dashboard)
+A secure workspace for companies to manage their talent pipeline.
+* **Command Dashboard:** High-level overview of active internship listings and current applicant volume.
+* **Listing Deployment:** Publish detailed internship opportunities including role titles, locational data, duration, stipend, and strict deadlines.
+* **Lifecycle Management:** View, edit, or terminate existing internship postings in real-time.
+* **Applicant Tracking:** Centralized view of all candidate applications mapped to specific job postings.
+* **Corporate Identity:** Dynamic company profile management (logo, corporate description, and contact vectors).
+
+### 🎓 Student Portal (Candidate Dashboard)
+An intuitive interface for students to discover and apply for roles.
+* **Opportunity Matrix:** Browse a live feed of all available corporate internships with granular role details.
+* **Application Engine:** Seamlessly submit applications to targeted internships with a single click.
+* **Identity Management:** Maintain a personal candidate profile, including bio and contact data.
+* **Telemetry & Tracking:** Monitor the historical log and current status of all submitted applications.
 
 ---
 
-## Installation and Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/expolink.git
-   cd expolink
-   ```
-   
-2.	Install dependencies:
-   ```bash
-	npm install mysql2 formidable
-```
+## 🛠️ Technology Stack
 
-3.	Setup MySQL:
-	•	Make sure MySQL server is running.
-	•	The database and tables will be created automatically when you start the server.
+**Backend Infrastructure**
+* **Runtime:** Node.js (Native `HTTP` server architecture)
+* **Database:** MySQL (Integrated via the `mysql2` driver)
+* **Data Parsing:** `formidable` (Engineered for secure, multipart file/image uploads)
 
-4.	Run the server:
-  	```bash
-  	node server.js
-  	```
+**Frontend Architecture**
+* **Structure & Style:** HTML5, modern CSS3
+* **Logic:** Vanilla JavaScript (ES6+) for DOM manipulation and asynchronous API requests
 
-6.	Open your browser and visit:
-	```http://localhost:3000/login.html```
+---
 
-## Future Improvements
+## 🚀 Local Deployment Guide
 
-### Employer Side
-- **Edit Internships:** Enable editing of internship details (title, description, location, duration, stipend, deadline) directly from the Manage Internships page.
-- **Company Profile Management:** Allow employers to update their company name, password, and description securely.
-- **Application Status Management:** Provide functionality for employers to update the status of candidate applications (e.g., pending, shortlisted, rejected, accepted).
+To deploy the Expolink environment locally for testing or development, follow these CLI commands:
 
-### Student Side
-- **Enhanced Internship Applications:** Allow students to upload resumes and add personalized descriptions when applying for internships.
-- **Application Status Tracking:** Enable students to view the status of their internship applications in real-time.
+**1. Clone the repository:**
+```bash
+git clone [https://github.com/YOUR_USERNAME/expolink.git](https://github.com/YOUR_USERNAME/expolink.git)
+cd expolink
 
 ⸻
 
